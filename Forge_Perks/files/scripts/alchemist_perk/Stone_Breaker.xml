@@ -1,0 +1,14 @@
+<Entity>
+
+	<InteractableComponent
+		radius="10"
+		ui_text="Press E to Interact"
+		name="Elemental Stone Breaker"
+	></InteractableComponent>
+	
+	
+	<LuaComponent
+		script_interacting="mods/Forge_Perks/files/scripts/alchemist_perk/Fearless.lua"
+	></LuaComponent>
+	
+</Entity>

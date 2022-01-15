@@ -1,0 +1,74 @@
+<Entity name="Extol'sForgedSpriteGod">
+
+	<SpriteComponent 
+		_tags="item,enabled_in_world,enabled_in_hand" 
+		alpha="0.75" 
+		image_file="data/ui_gfx/empty.png" 
+		offset_x="30"
+		offset_y="2"
+		>
+	</SpriteComponent>
+	
+	<VariableStorageComponent
+		name="handle"
+		value_string="nil"
+		value_int=""
+		>
+	</VariableStorageComponent>
+	
+	<SpriteComponent 
+		_tags="item,enabled_in_world,enabled_in_hand" 
+		alpha="0.75" 
+		image_file="data/ui_gfx/empty.png" 
+		offset_x="-15"
+		offset_y="3"
+		>
+	</SpriteComponent>
+	
+	<VariableStorageComponent
+		name="gem"
+		value_string="nil"
+		value_int=""
+		>
+	</VariableStorageComponent>
+	
+	<SpriteComponent 
+		_tags="item,enabled_in_world,enabled_in_hand" 
+		alpha="0.75" 
+		image_file="data/ui_gfx/empty.png" 
+		offset_x="0"
+		offset_y="5"
+		>
+	</SpriteComponent>
+	
+	<VariableStorageComponent
+		name="head"
+		value_string="nil"
+		value_int=""
+		>
+	</VariableStorageComponent>
+	
+	<VariableStorageComponent
+		name="old_head"
+		value_string="nil"
+		>
+	</VariableStorageComponent>
+	
+	<VariableStorageComponent
+		name="old_gem"
+		value_string="nil"
+		>
+	</VariableStorageComponent>
+	
+	<VariableStorageComponent
+		name="old_handle"
+		value_string="nil"
+		>
+	</VariableStorageComponent>
+
+	<LuaComponent
+	script_source_file="mods/Forge_Perks/files/scripts/alchemist_perk/Sprite_Manager.lua"
+	execute_every_n_frame="15"
+	></LuaComponent>
+	
+</Entity>

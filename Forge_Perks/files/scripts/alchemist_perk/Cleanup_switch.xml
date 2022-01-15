@@ -1,0 +1,14 @@
+<Entity>
+
+	<InteractableComponent
+	radius= "8"
+	ui_text= "Press E to Dump Waste"
+	name= ""
+	></InteractableComponent>
+	
+	
+	<LuaComponent
+	script_interacting = "mods/Forge_Perks/files/scripts/alchemist_perk/Board_Wipe.lua"
+	></LuaComponent>
+	
+</Entity>

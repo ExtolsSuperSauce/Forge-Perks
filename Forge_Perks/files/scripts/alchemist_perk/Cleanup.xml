@@ -1,0 +1,20 @@
+<Entity name="Extol's_Cleanup_Crew">
+	<CellEaterComponent
+		_enabled="0"
+		_tags="fire"
+		ignored_material_tag="[indestructible]">
+	</CellEaterComponent>
+	<MagicConvertMaterialComponent
+		_tags="fire"
+		_enabled="0"
+		loop="1"
+		kill_when_finished="0"
+		steps_per_frame="5"
+		from_material_tag="[liquid]"
+		to_material="air"
+		clean_stains="0"
+		is_circle="1"
+		radius="10"
+		>
+	</MagicConvertMaterialComponent>
+</Entity>

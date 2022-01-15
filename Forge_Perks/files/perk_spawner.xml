@@ -1,0 +1,6 @@
+<Entity>
+	<LuaComponent
+		script_source_file="mods/Forge_Perks/files/perk_spawn.lua"
+		execute_every_n_frame="3">
+	</LuaComponent>
+</Entity>

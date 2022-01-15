@@ -1,0 +1,41 @@
+<Entity name="bhybkd" >
+	<VariableStorageComponent
+		name="stored_run_count"
+		value_bool="0"
+		>
+	</VariableStorageComponent>
+	
+	<MagicConvertMaterialComponent
+		_tags="enabled_by_liquid"
+		_enabled="0"
+		loop="1"
+		kill_when_finished="0"
+		steps_per_frame="1"
+		from_material_tag="[sand_metal]"
+		to_material="air"
+		clean_stains="0"
+		is_circle="1"
+		radius="10"
+		>
+	</MagicConvertMaterialComponent>
+	
+	<MaterialAreaCheckerComponent
+		_tags="disabled_by_liquid"
+		_enabled="1"
+		area_aabb.min_x="0"
+		area_aabb.min_y="-5"
+		area_aabb.max_x="4"
+		area_aabb.max_y="-1"
+		update_every_x_frame="5"
+		material="metal_sand"
+		material2="copper"
+		kill_after_message="0"
+		look_for_failure="0"
+		>
+	</MaterialAreaCheckerComponent>
+
+	<LuaComponent
+		script_material_area_checker_success="mods/Forge_Perks/files/scripts/machine_perk/basic_aftermath.lua"
+		>
+	</LuaComponent>
+</Entity>

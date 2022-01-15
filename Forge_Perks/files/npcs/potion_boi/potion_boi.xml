@@ -1,0 +1,104 @@
+<Entity>
+	<Base file="data/entities/base_helpless_animal.xml" >
+		<AnimalAIComponent 
+			preferred_job="JobDefault"
+			attack_melee_enabled="0"
+			attack_ranged_entity_file=""
+			attack_ranged_predict="0"
+			attack_ranged_enabled="0"
+			attack_melee_enabled="0"
+			sense_creatures="1"
+			creature_detection_range_x="80"
+			creature_detection_range_y="40"
+			attack_melee_damage_min="0"
+			attack_melee_damage_max="0"
+			max_distance_to_move_from_home="0"
+			can_fly="0"
+			can_walk="0"
+			>
+		</AnimalAIComponent >
+
+		<DamageModelComponent 
+			ragdoll_filenames_file="data/ragdolls/peasant/filenames.txt" 
+			fire_probability_of_ignition="0.05"
+			hp="6.8"
+			>
+			<damage_multipliers
+				projectile="0.1"
+				fire="0.2" 
+				ice="0.3"
+				curse="0"
+				>
+			</damage_multipliers>
+		</DamageModelComponent>
+
+		<SpriteComponent
+			image_file="mods/Forge_Perks/files/npcs/potion_boi/sprite.xml"
+			offset_x="0"
+			offset_y="19"
+			z_index="1"
+			rect_animation="default"
+			>
+		</SpriteComponent>
+
+		<PathFindingGridMarkerComponent
+			marker_work_flag="24" >
+		</PathFindingGridMarkerComponent>
+
+		<CharacterPlatformingComponent 
+			jump_velocity_y="0" 
+			run_velocity="0"  
+			>
+		</CharacterPlatformingComponent>
+
+		<GenomeDataComponent 
+			herd_id="mage"
+			food_chain_rank="2"
+			is_predator="1" >
+		</GenomeDataComponent>
+
+		<HitboxComponent 
+			_enabled="1" 
+			aabb_min_x="-1" 
+			aabb_max_x="3" 
+			aabb_min_y="-16" 
+			aabb_max_y="-2" 
+			>
+		</HitboxComponent>
+
+		<CharacterDataComponent
+			collision_aabb_min_x="-1" 
+			collision_aabb_max_x="3" 
+			collision_aabb_min_y="-16" 
+			collision_aabb_max_y="-2" 
+			mass="2.4"
+			>
+		</CharacterDataComponent>
+
+		<CameraBoundComponent
+			max_count="30"
+			distance="160000">
+		</CameraBoundComponent>
+	</Base>
+
+	<InteractableComponent
+		ui_text="Press $0 to talk"
+		radius="15"
+		>
+	</InteractableComponent>
+
+	<VariableStorageComponent
+		_tags="hello"
+		value_bool="1"
+		>
+	</VariableStorageComponent>
+
+	<LuaComponent
+		script_interacting="mods/Forge_Perks/files/npcs/potion_boi/interact.lua"
+		script_source_file="mods/Forge_Perks/files/npcs/potion_boi/interact.lua"
+		execute_every_n_frame="1"
+		enable_coroutines="1"
+		>
+	</LuaComponent>
+
+</Entity>
