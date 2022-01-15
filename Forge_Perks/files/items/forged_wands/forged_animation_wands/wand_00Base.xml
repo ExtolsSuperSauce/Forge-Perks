@@ -1,0 +1,24 @@
+<Sprite 
+	filename="mods/Forge_Perks/files/items/forged_wands/forged_animation_wands/wand_00Base.png" 
+	offset_x="0" 
+	offset_y="0" 
+	default_animation="default"
+	>
+	
+  <!-- handgun -->
+  <RectAnimation 
+	name="default" 
+	pos_x="0" 
+	pos_y="0" 
+	offset_x="1" 
+	offset_y="19" 
+	has_offset="1"
+	frame_count="4" 
+	frame_width="16" 
+	frame_height="19" 
+	frame_wait="0.25" 
+	frames_per_row="10" 
+	loop="1"  >
+  </RectAnimation>
+  
+</Sprite>
