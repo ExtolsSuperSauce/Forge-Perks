@@ -6,11 +6,11 @@
 	>
 	
 	<RectAnimation 
-		name="default" 
+		name="powered" 
 		pos_x="0" 
 		pos_y="14" 
-		offset_x="0" 
-		offset_y="18" 
+		offset_x="4" 
+		offset_y="10" 
 		has_offset="1"
 		frame_count="4" 
 		frame_width="8" 
@@ -21,16 +21,16 @@
 	</RectAnimation>
   
     <RectAnimation 
-		name="wake" 
+		name="default" 
 		pos_x="0" 
 		pos_y="0" 
-		offset_x="0" 
-		offset_y="15" 
+		offset_x="4" 
+		offset_y="10" 
 		has_offset="1"
 		frame_count="4" 
 		frame_width="8" 
 		frame_height="13" 
-		frame_wait="0.25" 
+		frame_wait="0.5" 
 		frames_per_row="4" 
 		loop="1"  >
   </RectAnimation>

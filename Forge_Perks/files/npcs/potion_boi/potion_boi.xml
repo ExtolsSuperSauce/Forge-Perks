@@ -1,104 +1,139 @@
-<Entity>
-	<Base file="data/entities/base_helpless_animal.xml" >
-		<AnimalAIComponent 
-			preferred_job="JobDefault"
-			attack_melee_enabled="0"
-			attack_ranged_entity_file=""
-			attack_ranged_predict="0"
-			attack_ranged_enabled="0"
-			attack_melee_enabled="0"
-			sense_creatures="1"
-			creature_detection_range_x="80"
-			creature_detection_range_y="40"
-			attack_melee_damage_min="0"
-			attack_melee_damage_max="0"
-			max_distance_to_move_from_home="0"
-			can_fly="0"
-			can_walk="0"
-			>
-		</AnimalAIComponent >
-
-		<DamageModelComponent 
-			ragdoll_filenames_file="data/ragdolls/peasant/filenames.txt" 
-			fire_probability_of_ignition="0.05"
-			hp="6.8"
-			>
-			<damage_multipliers
-				projectile="0.1"
-				fire="0.2" 
-				ice="0.3"
-				curse="0"
-				>
-			</damage_multipliers>
-		</DamageModelComponent>
-
-		<SpriteComponent
-			image_file="mods/Forge_Perks/files/npcs/potion_boi/sprite.xml"
-			offset_x="0"
-			offset_y="19"
-			z_index="1"
-			rect_animation="default"
-			>
-		</SpriteComponent>
-
-		<PathFindingGridMarkerComponent
-			marker_work_flag="24" >
-		</PathFindingGridMarkerComponent>
-
-		<CharacterPlatformingComponent 
-			jump_velocity_y="0" 
-			run_velocity="0"  
-			>
-		</CharacterPlatformingComponent>
-
-		<GenomeDataComponent 
-			herd_id="mage"
-			food_chain_rank="2"
-			is_predator="1" >
-		</GenomeDataComponent>
-
-		<HitboxComponent 
-			_enabled="1" 
-			aabb_min_x="-1" 
-			aabb_max_x="3" 
-			aabb_min_y="-16" 
-			aabb_max_y="-2" 
-			>
-		</HitboxComponent>
-
-		<CharacterDataComponent
-			collision_aabb_min_x="-1" 
-			collision_aabb_max_x="3" 
-			collision_aabb_min_y="-16" 
-			collision_aabb_max_y="-2" 
-			mass="2.4"
-			>
-		</CharacterDataComponent>
-
-		<CameraBoundComponent
-			max_count="30"
-			distance="160000">
-		</CameraBoundComponent>
-	</Base>
-
-	<InteractableComponent
-		ui_text="Press $0 to talk"
-		radius="15"
-		>
-	</InteractableComponent>
-
-	<VariableStorageComponent
-		_tags="hello"
-		value_bool="1"
-		>
-	</VariableStorageComponent>
-
+<Entity name="extols_potion_boi">
+	<SpriteComponent
+		image_file="mods/Forge_Perks/files/npcs/potion_boi/sprite.xml"
+		offset_x="-1000"
+		offset_y="0"
+		z_index="1"
+		rect_animation="default">
+	</SpriteComponent>
+	
 	<LuaComponent
-		script_interacting="mods/Forge_Perks/files/npcs/potion_boi/interact.lua"
+		execute_every_n_frame="10"
 		script_source_file="mods/Forge_Perks/files/npcs/potion_boi/interact.lua"
-		execute_every_n_frame="1"
-		enable_coroutines="1"
-		>
-	</LuaComponent>
-
+		script_interacting="mods/Forge_Perks/files/npcs/potion_boi/reroll.lua"
+	></LuaComponent>
+	
+	<InteractableComponent
+		_tags="shop_cost"
+		_enabled="0"
+		ui_text="Press E to reroll potions"
+		radius="5"
+	></InteractableComponent>
+	
+	<ParticleEmitterComponent
+		_tags="shop_cost"
+		_enabled="0"
+		emit_cosmetic_particles="1"
+		emitted_material_name="spark_blue"
+		x_pos_offset_min="-7"
+		y_pos_offset_min="23"
+		x_pos_offset_max="-9"
+		y_pos_offset_max="25"
+		attractor_force="20"
+		lifetime_min="0.7"
+		lifetime_max="1.5"
+		render_back="0"
+		fade_based_on_lifetime="1"
+		collide_with_grid="0"
+		collide_with_gas_and_fire="0"
+		x_vel_min="-55"
+		x_vel_max="-45"
+		y_vel_min="0"
+		y_vel_max="0"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="6"
+	></ParticleEmitterComponent>
+	
+	<ParticleEmitterComponent
+		_tags="shop_cost"
+		_enabled="0"
+		emit_cosmetic_particles="1"
+		emitted_material_name="spark_blue"
+		x_pos_offset_min="7"
+		y_pos_offset_min="23"
+		x_pos_offset_max="9"
+		y_pos_offset_max="25"
+		attractor_force="20"
+		lifetime_min="0.7"
+		lifetime_max="1.5"
+		render_back="0"
+		fade_based_on_lifetime="1"
+		collide_with_grid="0"
+		collide_with_gas_and_fire="0"
+		x_vel_min="45"
+		x_vel_max="55"
+		y_vel_min="0"
+		y_vel_max="0"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="6"
+	></ParticleEmitterComponent>
+	
+	<ParticleEmitterComponent
+		_tags="shop_cost"
+		_enabled="0"
+		emit_cosmetic_particles="1"
+		emitted_material_name="spark_blue"
+		x_pos_offset_min="-1"
+		y_pos_offset_min="23"
+		x_pos_offset_max="1"
+		y_pos_offset_max="25"
+		attractor_force="18"
+		lifetime_min="0.7"
+		lifetime_max="1"
+		render_back="0"
+		fade_based_on_lifetime="1"
+		collide_with_grid="0"
+		collide_with_gas_and_fire="0"
+		x_vel_min="0"
+		x_vel_max="0"
+		y_vel_min="0"
+		y_vel_max="0"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="6"
+	></ParticleEmitterComponent>
+	
+	<ParticleEmitterComponent
+		emit_cosmetic_particles="1"
+		emitted_material_name="spark_blue"
+		x_pos_offset_min="0"
+		y_pos_offset_min="0"
+		x_pos_offset_max="0"
+		y_pos_offset_max="0"
+		lifetime_min="2"
+		lifetime_max="3"
+		render_back="0"
+		fade_based_on_lifetime="1"
+		collide_with_grid="0"
+		collide_with_gas_and_fire="0"
+		x_vel_min="0"
+		x_vel_max="0"
+		y_vel_min="0"
+		y_vel_max="0"
+		emission_interval_min_frames="10"
+		emission_interval_max_frames="45"
+		count_min="1"
+		count_max="2"
+		image_animation_file="mods/Forge_Perks/files/npcs/potion_boi/particle_emitter.png"
+		gravity.x="0"
+		gravity.y="0"
+		offset.x="35"
+		offset.y="-16"
+		image_animation_emission_probability="0.5"
+		emission_chance="15"
+		airflow_force="0.6"
+	></ParticleEmitterComponent>
+	
+	<VariableStorageComponent
+		value_int="1"
+		value_float="1"
+	></VariableStorageComponent>
+	
+	<SpriteComponent
+		_tags="TEXT_SPRITE"
+		is_text_sprite="1"
+		image_file="data/fonts/font_pixel_white.xml"
+		text="100"
+		offset_x="7" 
+		offset_y="21" 
+	></SpriteComponent>
 </Entity>
