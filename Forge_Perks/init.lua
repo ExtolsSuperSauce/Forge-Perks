@@ -2,7 +2,7 @@ ModMaterialsFileAdd("mods/Forge_Perks/files/materials.xml")
 ModLuaFileAppend( "data/scripts/perks/perk_list.lua", "mods/Forge_Perks/files/perk_list.lua" )
 ModLuaFileAppend( "data/scripts/biomes/snowcastle.lua", "mods/Forge_Perks/files/scripts/biomes_appended/snowcastle.lua" )
 ModLuaFileAppend( "data/scripts/biomes/temple_altar_left.lua", "mods/Forge_Perks/files/scripts/biomes_appended/temple_altar_left.lua" )
-dofile_once("mods/Forge_Perks/horscht_lib/DialogSystem/init.lua")("mods/Forge_Perks/horscht_lib/DialogSystem")
+--dofile_once("mods/Forge_Perks/horscht_lib/DialogSystem/init.lua")("mods/Forge_Perks/horscht_lib/DialogSystem")
 --ModRegisterAudioEventMappings("mods/Forge_Perks/files/monke_audio.txt")
 local content = ModTextFileGetContent("data/translations/common.csv")
 ModTextFileSetContent("data/translations/common.csv", content .. [[
