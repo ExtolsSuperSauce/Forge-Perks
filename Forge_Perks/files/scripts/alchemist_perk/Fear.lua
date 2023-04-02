@@ -6,20 +6,16 @@ local rand_part_table = {
 "mods/Forge_Perks/files/items/broken_parts/wand_heads/jungles_heart.xml",
 "mods/Forge_Perks/files/items/broken_parts/wand_heads/deer_skull.xml",
 "mods/Forge_Perks/files/items/broken_parts/wand_heads/mech_gear.xml",
-
 "mods/Forge_Perks/files/items/broken_parts/wand_shafts/book.xml",
 "mods/Forge_Perks/files/items/broken_parts/wand_shafts/dried_vine.xml",
 "mods/Forge_Perks/files/items/broken_parts/wand_shafts/duck_spine.xml",
 "mods/Forge_Perks/files/items/broken_parts/wand_shafts/mech_base.xml",
-
 "mods/Forge_Perks/files/items/broken_parts/broken_essence_gems/waterstone_shard.xml",
 "mods/Forge_Perks/files/items/broken_parts/broken_essence_gems/brimstone_shard.xml",
 "mods/Forge_Perks/files/items/broken_parts/broken_essence_gems/poopstone_shard.xml",
 "mods/Forge_Perks/files/items/broken_parts/broken_essence_gems/thunderstone_shard.xml",
 "mods/Forge_Perks/files/items/broken_parts/broken_essence_gems/stonestone_shard.xml"
 }
-
-
 
 function getPlayerEntity()
     local players = EntityGetWithTag("player_unit")
@@ -369,4 +365,3 @@ function wand_forge_builder()
 		end
 	end
 end
-

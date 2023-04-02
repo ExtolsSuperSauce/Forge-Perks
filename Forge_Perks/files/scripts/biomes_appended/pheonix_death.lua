@@ -6,7 +6,7 @@ if GameHasFlagRun("Extol'sPheonixDeath") == false then
 	if GameHasFlagRun("Extol'sWaterLoonDeath") then
 		ConvertMaterialEverywhere( CellFactory_GetType( "sand_ground" ), CellFactory_GetType( "magic_liquid_blood_bird" ) )
 		if HasFlagPersistent( "Forge_Perks_End" ) == false then
-			GamePrintImportant( "Thank You For Playing!!", "You've found all the Secrets! Great Job!" )
+			GamePrintImportant( "For Your Quest Is Complete", "yet at what cost?" )
 			AddFlagPersistent( "Forge_Perks_End" )
 		end
 	end
