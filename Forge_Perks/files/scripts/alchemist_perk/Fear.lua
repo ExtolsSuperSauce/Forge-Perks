@@ -17,14 +17,14 @@ local rand_part_table = {
 "mods/Forge_Perks/files/items/broken_parts/broken_essence_gems/stonestone_shard.xml"
 }
 
-function getPlayerEntity()
+local function getPlayerEntity()
     local players = EntityGetWithTag("player_unit")
     if #players == 0 then return end
 
     return players[1]
 end
 
-function setInternalVariableValue(entity_id, variable_name, variable_type, new_value)
+local function setInternalVariableValue(entity_id, variable_name, variable_type, new_value)
 
     local components = EntityGetComponent( entity_id, "VariableStorageComponent" )    
     if ( components ~= nil ) then
@@ -37,7 +37,7 @@ function setInternalVariableValue(entity_id, variable_name, variable_type, new_v
     end
 end
 
-function getInternalVariableValue(entity_id, variable_name, variable_type)
+local function getInternalVariableValue(entity_id, variable_name, variable_type)
     local value = nil
     local components = EntityGetComponent( entity_id, "VariableStorageComponent" )
     if ( components ~= nil ) then
@@ -51,7 +51,7 @@ function getInternalVariableValue(entity_id, variable_name, variable_type)
     return value
 end
 
-function getCurrentlyEquippedWandId()
+local function getCurrentlyEquippedWandId()
     local i2c_id = EntityGetFirstComponentIncludingDisabled(getPlayerEntity(), "Inventory2Component")
     local wand_id = ComponentGetValue2( i2c_id, "mActiveItem" )
     if(EntityHasTag(wand_id, "wand")) then
@@ -61,7 +61,7 @@ function getCurrentlyEquippedWandId()
     end
 end
 
-function getCurrentlyEquippedPartId()
+local function getCurrentlyEquippedPartId()
 	local yada = EntityGetFirstComponentIncludingDisabled(getPlayerEntity(), "Inventory2Component")
     local broken_part = ComponentGetValue2( yada, "mActiveItem" )
     if(EntityHasTag(broken_part, "forge_wand_part")) then
@@ -71,7 +71,7 @@ function getCurrentlyEquippedPartId()
     end
 end
 
-function moddedWandSpellBreaker()
+local function moddedWandSpellBreaker()
     local wand_spells = EntityGetAllChildren(getCurrentlyEquippedWandId())
 	local entity_id = GetUpdatedEntityID()
 	local x, y = EntityGetTransform( entity_id )
@@ -87,14 +87,14 @@ function moddedWandSpellBreaker()
 	end
 end
 
-function make_random_card( x, y )
+local function make_random_card( x, y )
 	
 	SetRandomSeed( GameGetFrameNum(), x + y )
 	
 	local item = ""
 	local valid = false
 	
-	local rand = Random( 1, 50 )
+	local rand = Random( 1, 69 )
 	if rand == 21 then
 		item = "regeneration_field"
 	elseif rand == 19 then
@@ -136,192 +136,124 @@ function make_random_card( x, y )
 		local card_entity = CreateItemActionEntity( item, x, y )
 		return card_entity
 	else
-		print( "No valid action entity found!" )
+		print( "No valid action entity found!?" )
 	end
 end
 
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform( entity_id )
-local alch_perk = ((GameHasFlagRun("Perk_Wand_Killer")) and (GameHasFlagRun("Perk_Wand_Crafter") == false ) and (GameHasFlagRun("Perk_Wand_Master") == false ))
-local mast_perk = ((GameHasFlagRun("Perk_Wand_Master")) and (alch_perk == false))
-local mach_perk = ((GameHasFlagRun("Perk_Wand_Crafter")) and (mast_perk == false))
-local mat_mast_basic = 0
-local mat_mast_better = 0
-local mat_mast_best = 0
-local materia_master = 0
-local mat_mach_basic = 0
-local mat_mach_better = 0
-local mat_mast_best = 0
-local material_machine = 0
-local rando_y = 0
-local rando_x = 0
-local loop_var = -27
-local max_rand = 53
-SetRandomSeed( GameGetFrameNum(), x + y )
+local alch_perk = GameHasFlagRun("Perk_Wand_Killer")
+local mast_perk = GameHasFlagRun("Perk_Wand_Master")
+local mach_perk = GameHasFlagRun("Perk_Wand_Crafter")
+SetRandomSeed( GameGetFrameNum(), y - x )
 function interacting(entity_who_interacted, entity_interacted, interactable_name)
-	local current_wand = getCurrentlyEquippedWandId()
 	local current_part = getCurrentlyEquippedPartId()
-	alch_perk = ((GameHasFlagRun("Perk_Wand_Killer")) and (GameHasFlagRun("Perk_Wand_Crafter") == false ) and (GameHasFlagRun("Perk_Wand_Master") == false ))
-	mast_perk = ((GameHasFlagRun("Perk_Wand_Master")) and (alch_perk == false) and (GameHasFlagRun("Perk_Wand_Crafter") == false ))
-	mach_perk = ((GameHasFlagRun("Perk_Wand_Crafter")) and (mast_perk == false))
-	if (current_part ~= nil) and (GameHasFlagRun("forge_assemble_activation") == false) then
+	if current_part ~= nil then
 		EntityRemoveTag(current_part, "forge_wand_part")
 		wand_forge_builder()
-	elseif (( alch_perk == true ) and ( current_wand ~= nil ) ) then
-		local px, py = EntityGetTransform( entity_who_interacted )
-		moddedWandSpellBreaker()			
-		local spell_vary = Random( 1, 3 )
-		if spell_vary == (2) then
-			make_random_card(px, py)
-		end
-		spell_vary = Random( 1, #rand_part_table )
-		EntityLoad(rand_part_table[spell_vary], x - 15, y )
-		EntityRemoveFromParent( current_wand )
-		EntityKill( current_wand )
-	elseif ( mast_perk == true ) then
-		GamePrint("Materials:")
-		local mast_basic_id = EntityGetWithName("Extol'sNatureCounter")
-		local mast_better_id = EntityGetWithName("Extol'sMachineCounter")
-		local mast_best_id = EntityGetWithName("Extol'sMagicCounter")
-		local bird_counter = EntityGetWithName("Extol'sBirdCounter")
-		mat_mast_basic = getInternalVariableValue(mast_basic_id, "stored_count", "value_int")
-		mat_mast_better = getInternalVariableValue(mast_better_id, "stored_count", "value_int")
-		mat_mast_best = getInternalVariableValue(mast_best_id, "stored_count", "value_int")
-		materia_master = getInternalVariableValue(bird_counter, "stored_count", "value_int")
-		if (mat_mast_basic ~= nil) then
-			GamePrint("Basic: " .. mat_mast_basic)
-		end
-		if (mat_mast_better ~= nil) then
-			GamePrint("Better: " .. mat_mast_better)
-		end
-		if (mat_mast_best ~= nil) then
-			GamePrint("Best: " .. mat_mast_best)
-		end
-		if (materia_master ~= nil) then
-			GamePrint("???: " .. materia_master)
-		end
-		local ability_component_id = EntityGetFirstComponentIncludingDisabled(current_wand, "AbilityComponent")
-		if (mat_mast_basic ~= nil) then
-			if ( current_wand ~= nil ) and (mat_mast_basic >= 1) then
-				GamePrint("Basic Used: " .. mat_mast_basic)
-				for i = 1, mat_mast_basic do
-					local deck_capacity = ComponentObjectGetValue2(ability_component_id, "gun_config", "deck_capacity")
-					local spells_per = ComponentObjectGetValue2(ability_component_id, "gun_config", "actions_per_round")
-					local shot_spread = ComponentObjectGetValue2(ability_component_id, "gunaction_config", "spread_degrees")
-					if (deck_capacity <= 35) then
-						ComponentObjectSetValue2(ability_component_id, "gun_config", "deck_capacity", deck_capacity + 2)
-					end
-					if (spells_per <= 36) then
-						ComponentObjectSetValue2(ability_component_id, "gun_config", "actions_per_round", spells_per + 1)
-					end
-					if (shot_spread >= -359) then
-						ComponentObjectSetValue2(ability_component_id, "gunaction_config", "spread_degrees", shot_spread - 10)
-					end
-				end
-				setInternalVariableValue(mast_basic_id, "stored_count", "value_int", 0)
+	elseif alch_perk then
+		local current_wand = getCurrentlyEquippedWandId()
+		if current_wand ~= nil then
+			moddedWandSpellBreaker()
+			local card_rnd = Random(0,3)
+			local card_counter = 0
+			local px, py = EntityGetTransform(entity_who_interacted)
+			while card_counter <= card_rnd do
+				make_random_card(px,py)
+				card_counter = card_counter + Random(1,2)
 			end
+			EntityKill(current_wand)
+			local part_rnd = Random(1,#rand_part_table)
+			EntityLoad(rand_part_table[part_rnd], px, py)
 		end
-		if (mat_mast_better ~= nil) then
-			if ( current_wand ~= nil ) and (mat_mast_better >= 1) then
-				GamePrint("Better Used: " .. mat_mast_better)
-				for i = 1, mat_mast_better do
-					local spells_per = ComponentObjectGetValue2(ability_component_id, "gun_config", "actions_per_round")
-					local castDelay = ComponentObjectGetValue2(ability_component_id, "gunaction_config", "fire_rate_wait")
-					local rechargeTime = ComponentObjectGetValue2(ability_component_id, "gun_config", "reload_time")
-					if (spells_per >= 3) then
-						ComponentObjectSetValue2(ability_component_id, "gun_config", "actions_per_round", spells_per - 2)
-					end
-					if (castDelay >= -1000) then
-						ComponentObjectSetValue2(ability_component_id, "gunaction_config", "fire_rate_wait", castDelay - 15)
-					end
-					if (rechargeTime >= -1000) then
-						ComponentObjectSetValue2(ability_component_id, "gun_config", "reload_time", rechargeTime - 15)
-					end
-				end
-				setInternalVariableValue(mast_better_id, "stored_count", "value_int", 0)
+	elseif mast_perk then
+		local current_wand = getCurrentlyEquippedWandId()
+		if current_wand == nil then return end
+		local AC_id = EntityGetFirstComponentIncludingDisabled( current_wand, "AbilityComponent" )
+		local mat_god = EntityGetWithName("bhybkd")
+		local vsc_id = EntityGetFirstComponentIncludingDisabled(mat_god, "VariableStorageComponent")
+		local basic_mat = ComponentGetValue2(vsc_id, "value_int")
+		local capacity = ComponentObjectGetValue2(AC_id, "gun_config", "deck_capacity")
+		if capacity < 30 then
+			capacity = math.min(capacity + basic_mat, 30)
+			ComponentObjectSetValue2(AC_id, "gun_config", "deck_capacity", capacity)
+		end
+		local spread = ComponentObjectGetValue2(AC_id, "gunaction_config", "spread_degrees")
+		ComponentObjectSetValue2(AC_id, "gunaction_config", "spread_degrees", math.max(spread - (basic_mat * 2), -30))
+		local action_count = ComponentObjectGetValue2(AC_id, "gun_config", "actions_per_round")
+		action_count = math.min(action_count + basic_mat, capacity)
+		ComponentObjectSetValue2(AC_id, "gun_config", "actions_per_round", action_count)
+		local better_mat = ComponentGetValue2(vsc_id, "value_float")
+		action_count = math.max(action_count - (better_mat * 2), 1)
+		ComponentObjectSetValue2(AC_id, "gun_config", "actions_per_round", action_count)
+		local cast_delay = ComponentObjectGetValue2(AC_id, "gunaction_config", "fire_rate_wait")
+		ComponentObjectSetValue2(AC_id, "gunaction_config", "fire_rate_wait", cast_delay - (better_mat * 2))
+		local recharge = ComponentObjectGetValue2(AC_id, "gun_config", "reload_time")
+		recharge = recharge - (better_mat * 20)
+		ComponentObjectSetValue2(AC_id, "gunaction_config", "reload_time", recharge)
+		local best_mat = tonumber(ComponentGetValue2(vsc_id, "value_string"))
+		best_mat = best_mat or 0
+		ComponentObjectSetValue2(AC_id, "gunaction_config", "reload_time", recharge + (best_mat * 3))
+		GamePrint("?")
+		local manamax = ComponentGetValue2(AC_id, "mana_max")
+		ComponentSetValue2(AC_id, "mana_max", manamax + (best_mat * 15))
+		local charge_speed = ComponentGetValue2( AC_id, "mana_charge_speed" )
+		ComponentSetValue2(AC_id, "mana_charge_speed", charge_speed + (best_mat * 25))
+		local unknown = tonumber(ComponentGetValue2(vsc_id, "name"))
+		unknown = unknown or 0
+		local power_trip = ComponentObjectGetValue2(AC_id, "gun_config", "shuffle_deck_when_empty")
+		local stored_power = ComponentObjectGetValue2(AC_id, "gunaction_config", "speed_multiplier")
+		GamePrint("?")
+		if power_trip == 1 then
+			ComponentObjectSetValue2(ability_component_id, "gun_config", "shuffle_deck_when_empty", 0)
+			unknown = unknown - 1
+			ComponentObjectSetValue2(ability_component_id, "gunaction_config", "speed_multiplier", math.min(stored_power + (unknown * 0.15), 50))
+		else
+			ComponentObjectSetValue2(ability_component_id, "gunaction_config", "speed_multiplier", math.min(stored_power + (unknown * 0.15), 50))
+		end
+		ComponentObjectSetValue2(ability_component_id, "gunaction_config", "speed_multiplier", math.min(stored_power + unknown * 0.3, 50))
+		ComponentSetValue2(vsc_id, "name", "0")
+		ComponentSetValue2(vsc_id, "value_string", "0")
+		ComponentSetValue2(vsc_id, "value_float", 0)
+		ComponentSetValue2(vsc_id, "value_int", 0)
+	elseif mach_perk then
+		local mat_god = EntityGetWithName("bhybkd")
+		local vsc_id = EntityGetFirstComponentIncludingDisabled(mat_god, "VariableStorageComponent")
+		local basic_mat = ComponentGetValue2(vsc_id, "value_int")
+		for i = 1, basic_mat do
+			if i >=5 then
+				break
 			end
+			local loaded_wand = EntityLoad("data/entities/items/wand_level_04_better.xml", Random(-10000,10000), Random(-10000, 10000))
+			EntityApplyTransform(loaded_wand, x - (i * 5), y - 3)
+			ComponentSetValue2(vsc_id, "value_int", basic_mat - i)
 		end
-		if (mat_mast_best ~= nil) then
-			if (current_wand ~= nil ) and (mat_mast_best >= 1) then
-				GamePrint("Best Used: " .. mat_mast_best)
-				for i = 1, mat_mast_best do
-					local manaMax = ComponentGetValue2(ability_component_id, "mana_max")
-					local manaChargeSpeed = ComponentGetValue2(ability_component_id, "mana_charge_speed")
-					local rechargeTime = ComponentObjectGetValue2(ability_component_id, "gun_config", "reload_time")
-					if manaMax <= 4999 then
-						ComponentSetValue2(ability_component_id, "mana_max", manaMax + 75)
-					end
-					if manaChargeSpeed <= 1999 then
-						ComponentSetValue2(ability_component_id, "mana_charge_speed", manaChargeSpeed + 50)
-					end
-					if rechargeTime <= 600 then
-						ComponentObjectSetValue2(ability_component_id, "gun_config", "reload_time", rechargeTime + 3)
-					end
-				end
-				setInternalVariableValue(mast_best_id, "stored_count", "value_int", 0)
+		local better_mat = ComponentGetValue2(vsc_id, "value_float")
+		for i = 1, better_mat do
+			if i >=5 then
+				break
 			end
+			local loaded_wand = EntityLoad("data/entities/items/wand_level_05_better.xml", Random(-10000,10000), Random(-10000, 10000))
+			EntityApplyTransform(loaded_wand, x - (i * 5), y - 6)
+			ComponentSetValue2(vsc_id, "value_int", better_mat - i)
 		end
-		if (materia_master ~= nil) then
-			if (current_wand ~= nil) and (materia_master >= 1) then
-			GamePrint("The Phoenix Rises Again")
-				for i = 1, materia_master do
-					local power_trip = ComponentObjectGetValue2(ability_component_id, "gun_config", "shuffle_deck_when_empty")
-					local speed_up = ComponentObjectGetValue2(ability_component_id, "gunaction_config", "speed_multiplier")
-					ComponentObjectSetValue2(ability_component_id, "gun_config", "actions_per_round", 1)
-					if power_trip == 1 then
-						ComponentObjectSetValue2(ability_component_id, "gun_config", "shuffle_deck_when_empty", 0)
-					else
-						ComponentObjectSetValue2(ability_component_id, "gunaction_config", "speed_multiplier", speed_up + 0.5)
-					end
-					if speed_up <= 250 then
-						ComponentObjectSetValue2(ability_component_id, "gunaction_config", "speed_multiplier", speed_up + 1)
-					end
-				end
-				setInternalVariableValue(bird_counter, "stored_count", "value_int", 0)
+		local best_mat = tonumber(ComponentGetValue2(vsc_id, "value_string"))
+		for i = 1, best_mat do
+			if i >=5 then
+				break
 			end
+			local loaded_wand = EntityLoad("data/entities/items/wand_level_06_better.xml", Random(-10000,10000), Random(-10000, 10000))
+			EntityApplyTransform(loaded_wand, x - (i * 5), y - 9)
+			ComponentSetValue2(vsc_id, "value_int", best_mat - i)
 		end
-	elseif ( mach_perk == true ) then
-		local mach_basic_id = EntityGetWithName("Extol'sNatureCounter")
-		local mach_better_id = EntityGetWithName("Extol'sMachineCounter")
-		local mach_best_id = EntityGetWithName("Extol'sMagicCounter")
-		local bird_counter = EntityGetWithName("Extol'sBirdCounter")
-		mat_mach_basic = getInternalVariableValue(mach_basic_id, "stored_count", "value_int")
-		mat_mach_better = getInternalVariableValue(mach_better_id, "stored_count", "value_int")
-		mat_mach_best = getInternalVariableValue(mach_best_id, "stored_count", "value_int")
-		material_machine = getInternalVariableValue(bird_counter, "stored_count", "value_int")
-		if ((mat_mach_basic ~= nil) and (mat_mach_basic > 0)) then
-			GamePrint("Basic made: ".. mat_mach_basic)
-			for i = 1, mat_mach_basic do
-				rando_y = Random( 2, 50 )
-				rando_x = Random( 0, 50 )
-				loop_var = loop_var + 1
-				EntityLoad("data/entities/items/wand_level_05_better.xml", x - 25 + rando_x, y - rando_y )
+		local unknown = tonumber(ComponentGetValue2(vsc_id, "name"))
+		for i = 1, best_mat do
+			if i >=5 then
+				break
 			end
-			loop_var = 0
-			setInternalVariableValue(mach_basic_id, "stored_count", "value_int", 0)
-		end
-		if ((mat_mach_better ~= nil) and (mat_mach_better > 0)) then
-			GamePrint("Better made: ".. mat_mach_better)
-			for i = 1, mat_mach_better do
-				rando_y = Random( 2, 55 )
-				rando_x = Random( 0, 55 )
-				loop_var = loop_var + 1
-				EntityLoad("data/entities/items/wand_level_06_better.xml", x - 25 + rando_x, y - rando_y )
-			end
-			loop_var = 0
-			setInternalVariableValue(mach_better_id, "stored_count", "value_int", 0)
-		end
-		if ((mat_mach_best ~= nil) and (mat_mach_best > 0)) then
-			GamePrint("Best made: ".. mat_mach_best)
-			for i = 1, mat_mach_best do
-				rando_y = Random( 2, 60 )
-				rando_x = Random( 0, 65 )
-				EntityLoad("data/entities/items/wand_level_10.xml", x - 25 + rando_x, y - rando_y )
-			end
-			setInternalVariableValue(mach_best_id, "stored_count", "value_int", 0)
-		end
-		if ((material_machine ~= nil) and (material_machine > 0)) then
-			SetTimeOut( 1 , "mods/Forge_Perks/files/scripts/alchemist_perk/Matter_Machine.lua", "spawn_wands" )
+			local loaded_wand = EntityLoad("data/entities/items/wand_level_10.xml", Random(-10000,10000), Random(-10000, 10000))
+			EntityApplyTransform(loaded_wand, x - (i * 5), y - 12)
+			ComponentSetValue2(vsc_id, "value_int", unknown - i)
 		end
 	end
 end

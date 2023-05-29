@@ -1,0 +1,29 @@
+<Entity name="ExtolMatDump" >
+
+	<VariableStorageComponent>
+	</VariableStorageComponent>
+	
+	<ParticleEmitterComponent
+		create_real_particles="1"
+		x_pos_offset_min="-5"
+		x_pos_offset_max="0"
+		y_pos_offset_min="-3"
+		y_pos_offset_max="2"
+		x_vel_min="-22"
+		x_vel_max="-19"
+		y_vel_min="10"
+		y_vel_max="15"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		use_material_inventory="1">
+	</ParticleEmitterComponent>
+
+	<MaterialInventoryComponent
+		drop_as_item="0">
+	</MaterialInventoryComponent>
+
+	<LuaComponent
+		script_source_file="mods/Forge_Perks/files/scripts/machine_perk/mat_dumper.lua">
+	</LuaComponent>
+	
+</Entity>

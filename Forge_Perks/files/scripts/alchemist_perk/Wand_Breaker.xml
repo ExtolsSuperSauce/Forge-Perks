@@ -1,14 +1,10 @@
 <Entity>
-
 	<InteractableComponent
-	radius= "10"
-	ui_text= "Press E to Interact"
-	name= ""
+		radius= "10"
+		ui_text= "Press E to Interact"
+		name= ""
 	></InteractableComponent>
-	
-	
 	<LuaComponent
-	script_interacting = "mods/Forge_Perks/files/scripts/alchemist_perk/Fear.lua"
+		script_interacting = "mods/Forge_Perks/files/scripts/alchemist_perk/Fear.lua"
 	></LuaComponent>
-	
 </Entity>

@@ -43,7 +43,7 @@ function setInternalVariableValue(entity_id, variable_name, variable_type, new_v
     end
 end
 dofile_once("mods/Forge_Perks/files/items/part_list.lua")
-DoubleCheck()
+DoubleCheck() -- first check
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform(entity_id)
 local new_essence = getInternalVariableValue(entity_id, "gem", "value_string")

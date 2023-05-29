@@ -1,0 +1,42 @@
+<Entity name="bhybkd" >
+
+	<VariableStorageComponent>
+	</VariableStorageComponent>
+	
+	<VariableStorageComponent
+		_tags="ExtolForgeStorage"
+		name="12"
+		value_int="10"
+		value_float="9"
+		value_string="8">
+	</VariableStorageComponent>
+
+	<MaterialSuckerComponent 
+		material_type="1"
+		barrel_size="1000"
+		num_cells_sucked_per_frame="10"
+		randomized_position.min_x="-1"
+		randomized_position.max_x="5"
+		randomized_position.min_y="-5"
+		randomized_position.max_y="1"
+	></MaterialSuckerComponent>
+
+	<MaterialSuckerComponent 
+		barrel_size="1000"
+		num_cells_sucked_per_frame="10"
+		randomized_position.min_x="-1"
+		randomized_position.max_x="5"
+		randomized_position.min_y="-5"
+		randomized_position.max_y="1"
+	></MaterialSuckerComponent>
+
+	<MaterialInventoryComponent
+		drop_as_item="0">
+	</MaterialInventoryComponent>
+
+	<LuaComponent
+		script_source_file="mods/Forge_Perks/files/scripts/machine_perk/basic_aftermath.lua"
+		execute_every_n_frame="30">
+	</LuaComponent>
+	
+</Entity>
