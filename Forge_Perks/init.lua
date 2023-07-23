@@ -56,3 +56,8 @@ mBPS:add_child(nxml.parse([[
 ]]))
 
 ModTextFileSetContent("data/biome/_pixel_scenes.xml", tostring(xml))
+
+function PlayerSpawned(pid)
+	EntitySetDamageFromMaterial( pid, "blood_branch", 0.4)
+	EntitySetDamageFromMaterial( pid, "blood_water", 0.4)
+end
