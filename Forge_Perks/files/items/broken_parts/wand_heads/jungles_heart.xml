@@ -1,4 +1,4 @@
-<Entity tags="forge_wand_part,forge_wand_head" name="01" >
+<Entity tags="forge_wand_part,forge_wand_head,item" name="01" >
 
   <PhysicsBodyComponent 
     _tags="enabled_in_world"

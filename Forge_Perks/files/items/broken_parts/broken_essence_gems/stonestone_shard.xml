@@ -1,4 +1,4 @@
-<Entity tags="forge_wand_part,forge_wand_essence" name="04" >
+<Entity tags="forge_wand_part,forge_wand_essence,item" name="04" >
 
   <!-- physical presence -->
   
