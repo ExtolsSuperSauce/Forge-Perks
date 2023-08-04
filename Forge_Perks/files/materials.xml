@@ -38,7 +38,7 @@
 	</Graphics>
 </CellData>
 
-  <CellData
+<CellData
 	name="hardened_steel_static"
 	ui_name="Enchanted Steel"
 	tags="[indestructible]"
@@ -60,8 +60,7 @@
 	audio_physics_material_wall="metalwall"
 	audio_physics_material_solid="metalhollow"
 	show_in_creative_mode="1"
-	>
-  </CellData>
+></CellData>
 
 <CellData
 	name="part_aluminium"
@@ -112,8 +111,7 @@
 	durability="14"
 	audio_physics_material_wall="woodwall"
 	audio_physics_material_solid="cloth"
-	>
-</CellData>
+></CellData>
 
 <CellData
 	name="wood_wand_part"
@@ -135,8 +133,7 @@
 	durability="14"
 	audio_physics_material_wall="woodwall"
 	audio_physics_material_solid="wood"
-	>
-</CellData>
+></CellData>
 
 <CellData
 	name="bone_wand_part"
@@ -158,8 +155,7 @@
 	durability="14"
 	audio_physics_material_wall="bone"
 	audio_physics_material_solid="bone"
-	>
-</CellData>
+></CellData>
 
 <CellData
 	name="blood_water"
@@ -205,16 +201,15 @@
 	audio_physics_material_solid="rock"
 	>
 	<Graphics
-		color="A0376259"
-		>
+		color="A0376259">
 	</Graphics>
 </CellData>
 
- <CellData
-	name="sand_ground"
+<CellData
+	name="ext_sand_ground"
 	ui_name="$mat_sandground"
-  	tags="[neon_tubes]"
-	burnable="0"
+  	tags="[EXTOL_ANTIMATTER]"
+	burnable="1"
 	density="0"
 	cell_type="liquid"
 	wang_color="ffDAD969"
@@ -222,18 +217,19 @@
 	liquid_gravity="0.5"
 	liquid_sand="1"
 	on_fire="0"
-	requires_oxygen="0"
-	temperature_of_fire="10"
-	hp="9999999" 
+	requires_oxygen="1"
+	temperature_of_fire="9000"
+	hp="9999999"
+	fire_hp="600"	
 	durability="20"
-	gfx_glow="500"
+	gfx_glow="600"
 	audio_materialaudio_type="LAVA" 
 	show_in_creative_mode="1"
 	>
     <Graphics
-		color="ff000000" >
+		color="ff000000">
     </Graphics>
-  </CellData>
+</CellData>
 
 <CellData
 	name="magic_liquid_blood_magic"
@@ -253,12 +249,10 @@
 	liquid_sprite_stain_shaken_drop_chance="5"
 	status_effects="MANA_REGENERATION"
 	audio_materialaudio_type="MAGICAL" 
-	show_in_creative_mode="1"
-	>
+	show_in_creative_mode="1">
 	<Graphics
-        color="80fffea3"
-        >
-    </Graphics>
+        color="80fffea3">
+	</Graphics>
 	<ParticleEffect
 		vel.y="0"
 		vel_random.min_x="-17.43"
@@ -334,12 +328,10 @@
 	on_fire="0"
 	requires_oxygen="0"
 	audio_materialaudio_type="MAGICAL" 
-	show_in_creative_mode="1"
-	>
+	show_in_creative_mode="1">
     <Graphics
 	texture_file="data/materials_gfx/honey.png"
-	color="efefa101"
-	>
+	color="efefa101">
 	</Graphics>
 	<ParticleEffect
 		vel.y="2.86"
@@ -350,8 +342,7 @@
 		render_on_grid="1"
 		probability="0.6"
 		count.min="0"
-		count.max="1"
-	>
+		count.max="1">
 	</ParticleEffect>
 </CellData>
 
@@ -372,11 +363,10 @@
 	liquid_stains="1"
 	liquid_sprite_stain_shaken_drop_chance="5"
 	status_effects="BLOODY"
-	show_in_creative_mode="1"
-	>
+	show_in_creative_mode="1">
 	<Graphics
-	texture_file="data/materials_gfx/swamp.png"
-	color="802f2f0a" >
+		texture_file="data/materials_gfx/swamp.png"
+		color="802f2f0a">
     </Graphics>
 	<ParticleEffect
 		vel.y="0"
@@ -394,8 +384,7 @@
 		friction="3.714"
 		probability="0.0857"
 		count.min="0"
-		count.max="1"
-	>
+		count.max="1">
 	</ParticleEffect>
 	<StatusEffects>
 		<Ingestion>
@@ -424,11 +413,9 @@
 	liquid_stains="1"
 	liquid_sprite_stain_shaken_drop_chance="5"
 	status_effects="OILED"
-	show_in_creative_mode="1"
-	>
+	show_in_creative_mode="1">
 	<Graphics
-        color="A00000a3"
-		>
+        color="A00000a3">
     </Graphics>
 	<StatusEffects>
 		<Ingestion>
@@ -439,158 +426,131 @@
 </CellData>
 
 	<Reaction probability="100"
-		input_cell1="oil" 			input_cell2="acid"
-		output_cell1="acid" 		output_cell2="magic_liquid_blood_machine"  
+		input_cell1="oil" input_cell2="acid"
+		output_cell1="acid" output_cell2="magic_liquid_blood_machine"  
 		>
 	</Reaction>
 	
 	<Reaction probability="10"
-		input_cell1="oil" 			input_cell2="magic_liquid_blood_machine"
-		output_cell1="acid" 		output_cell2="magic_liquid_blood_machine"  
+		input_cell1="oil" input_cell2="magic_liquid_blood_machine"
+		output_cell1="acid" output_cell2="magic_liquid_blood_machine"  
 		>
 	</Reaction>
 	
 	<Reaction probability="2"
-		input_cell1="acid" 			input_cell2="magic_liquid_blood_machine"
-		output_cell1="oil" 		output_cell2="magic_liquid_blood_machine"  
+		input_cell1="acid" 	input_cell2="magic_liquid_blood_machine"
+		output_cell1="oil" 	output_cell2="magic_liquid_blood_machine"  
 		>
 	</Reaction>
 	
 	<Reaction probability="100"
-		input_cell1="magic_liquid_mana_regeneration" 		input_cell2="material_confusion"
-		output_cell1="smoke" 								output_cell2="magic_liquid_blood_magic"  
-		>
+		input_cell1="magic_liquid_mana_regeneration" input_cell2="material_confusion"
+		output_cell1="smoke" output_cell2="magic_liquid_blood_magic"  >
 	</Reaction>
 	
 	<Reaction probability="100"
-		input_cell1="rotten_meat" 		input_cell2="magic_liquid_charm"
-		output_cell1="rotten_meat" 		output_cell2="magic_liquid_worm_attractor" 
-										blob_radius2="9"
-										blob_restrict_to_input_material2="1"
-		>
+		input_cell1="rotten_meat" input_cell2="magic_liquid_charm"
+		output_cell1="rotten_meat" output_cell2="magic_liquid_worm_attractor" 
+		blob_radius2="9" blob_restrict_to_input_material2="1">
 	</Reaction>
 	
 	<Reaction probability="5"
-		input_cell1="water" 		input_cell2="meat_frog"
-		output_cell1="magic_liquid_charm" 		output_cell2="meat_frog"  
-		>
+		input_cell1="water" input_cell2="meat_frog"
+		output_cell1="magic_liquid_charm" output_cell2="meat_frog"  >
 	</Reaction>
 	
 	<Reaction probability="60"
-		input_cell1="blood" 							input_cell2="swamp"
-		output_cell1="magic_liquid_blood_nature" 		output_cell2="magic_liquid_blood_nature"  
-		>
+		input_cell1="blood" input_cell2="swamp"
+		output_cell1="magic_liquid_blood_nature" output_cell2="magic_liquid_blood_nature"  >
 	</Reaction>
 	
 	<Reaction probability="25"
-		input_cell1="magic_liquid_blood_nature" 		input_cell2="blood"
-		output_cell1="magic_liquid_blood_nature" 		output_cell2="swamp"  
-		>
+		input_cell1="magic_liquid_blood_nature" input_cell2="blood"
+		output_cell1="magic_liquid_blood_nature" output_cell2="swamp"  >
 	</Reaction>
 	
 	<Reaction probability="60"
-		input_cell1="[extols_unknown]" 						input_cell2="[alchemy]"
-		output_cell1="magic_liquid_blood_bird" 		output_cell2="blood_precursor"  
-		>
+		input_cell1="[extols_unknown]" 	input_cell2="[alchemy]"
+		output_cell1="magic_liquid_blood_bird" 	output_cell2="blood_precursor"  >
 	</Reaction>
 	
 	<Reaction probability="6"
-		input_cell1="[extols_unknown]" 				input_cell2="[alchemy]"
-		output_cell1="[extols_unknown]" 		output_cell2="blood_precursor"  
-		>
+		input_cell1="[extols_unknown]" 	input_cell2="[alchemy]"
+		output_cell1="[extols_unknown]" output_cell2="blood_precursor"  >
 	</Reaction>
 	
 	<Reaction probability="60"
-		input_cell1="[extols_unknown]" 				input_cell2="corruption_static"
-		output_cell1="[extols_unknown]" 		output_cell2="blood_precursor"  
-		>
+		input_cell1="[extols_unknown]" 	input_cell2="corruption_static"
+		output_cell1="[extols_unknown]" output_cell2="blood_precursor"  >
 	</Reaction>
 	
 	<Reaction probability="100"
-		input_cell1="[extols_unknown]" 				input_cell2="corruption_static"
-		output_cell1="[extols_unknown]" 		output_cell2="magic_liquid_blood_bird"  
-		>
+		input_cell1="[extols_unknown]" 	input_cell2="corruption_static"
+		output_cell1="[extols_unknown]" output_cell2="magic_liquid_blood_bird"  >
 	</Reaction>
 	
 	<Reaction probability="1"
-		input_cell1="[extols_unknown]" 				input_cell2="[alchemy]"
-		output_cell1="[extols_unknown]" 		output_cell2="fire"  
-		>
+		input_cell1="[extols_unknown]" input_cell2="[alchemy]"
+		output_cell1="[extols_unknown]" output_cell2="fire"  >
 	</Reaction>
 	
 	<Reaction probability="0.5"
-		input_cell1="[extols_unknown]" 					input_cell2="[alchemy]"
-		output_cell1="[extols_unknown]" 			output_cell2="gold"  
-		blob_radius1="5"						blob_radius2="5"
-		blob_restrict_to_input_material1="1"	blob_restrict_to_input_material2="1"
-		>
+		input_cell1="[extols_unknown]" 	input_cell2="[alchemy]"
+		output_cell1="[extols_unknown]" output_cell2="gold"  
+		blob_radius1="5" blob_radius2="5" blob_restrict_to_input_material1="1" blob_restrict_to_input_material2="1">
 	</Reaction>
 	
 	<Reaction probability="3"
-		input_cell1="[extols_unknown]" 					input_cell2="[alchemy]"
-		output_cell1="[extols_unknown]" 			output_cell2="corruption_static"  
-		blob_radius1="9"						blob_radius2="9"
-		blob_restrict_to_input_material1="1"	blob_restrict_to_input_material2="1"
-		>
+		input_cell1="[extols_unknown]" input_cell2="[alchemy]"
+		output_cell1="[extols_unknown]" output_cell2="corruption_static"  
+		blob_radius1="9" blob_radius2="9" blob_restrict_to_input_material1="1" blob_restrict_to_input_material2="1">
 	</Reaction>
 	
 	<Reaction probability="20"
-		input_cell1="[extols_unknown]" 				input_cell2="[liquid]"
-		output_cell1="[extols_unknown]" 		output_cell2="blood_precursor"  
-		>
+		input_cell1="[extols_unknown]" input_cell2="[liquid]"
+		output_cell1="[extols_unknown]" output_cell2="blood_precursor"  >
 	</Reaction>
 	
 	<Reaction probability="20"
 		input_cell1="[extols_unknown]" 					input_cell2="[impure]"
 		output_cell1="[extols_unknown]" 			output_cell2="corruption_static"  
-												blob_radius2="9"
-												blob_restrict_to_input_material2="1"
-		>
+		blob_radius2="9" blob_restrict_to_input_material2="1">
 	</Reaction>
 	
 	<Reaction probability="1"
 		input_cell1="[extols_unknown]" 					input_cell2="[corrodible]"
 		output_cell1="[extols_unknown]" 			output_cell2="sand"  
-												blob_radius2="3"
-												blob_restrict_to_input_material2="1"
-		>
+		blob_radius2="3" blob_restrict_to_input_material2="1">
 	</Reaction>
 	
 	<Reaction probability="75"
 		input_cell1="magic_liquid_blood_machine" 	input_cell2="magic_liquid_blood_magic" 		input_cell3="magic_liquid_blood_nature"
 		output_cell1="blood_precursor" 				output_cell2="blood_precursor"  			output_cell3="smoke"
 		blob_radius1="10"							blob_radius2="10" 							blob_radius3="10"
-		blob_restrict_to_input_material1="1"		blob_restrict_to_input_material2="1" 		blob_restrict_to_input_material3="1"
-		>
+		blob_restrict_to_input_material1="1"		blob_restrict_to_input_material2="1" 		blob_restrict_to_input_material3="1">
 	</Reaction>
 	
 	<Reaction probability="100"
 		input_cell1="magic_liquid_blood_bird" 				input_cell2="cloud_slime"
-		output_cell1="blood_precursor" 		output_cell2="blood_precursor"  
-		>
+		output_cell1="blood_precursor" 		output_cell2="blood_precursor">
 	</Reaction>
 	
 	<Reaction probability="100"
 		input_cell1="magic_liquid_blood_bird" 	input_cell2="corruption_static"
-		output_cell1="magic_liquid_blood_bird" 	output_cell2="magic_liquid_blood_bird" 
-		>
+		output_cell1="magic_liquid_blood_bird" 	output_cell2="magic_liquid_blood_bird">
 	</Reaction>
   
 	<Reaction probability="100"
 		input_cell1="blood_precursor" 	input_cell2="void_liquid"
 		output_cell1="blood_water" 		output_cell2="blood_water" 
-										blob_radius2="30"
-										blob_restrict_to_input_material2="1"
-		entity="mods/Forge_Perks/files/items/rng_potions/unknown.xml"
-		>
+		blob_radius2="30" blob_restrict_to_input_material2="1"
+		entity="mods/Forge_Perks/files/items/rng_potions/unknown.xml">
 	</Reaction>
 	
 	<Reaction probability="100"
 		input_cell1="[extols_chaos]" 	input_cell2="magic_liquid_blood_bird"
 		output_cell1="[extols_chaos]" 	output_cell2="blood_water" 
-								blob_radius2="8"
-								blob_restrict_to_input_material2="1"
-		>
+		blob_radius2="8" blob_restrict_to_input_material2="1">
 	</Reaction>
 	
 	<Reaction probability="100"
@@ -624,33 +584,47 @@
 	</Reaction>
 	
 	<Reaction probability="100"
-		input_cell1="[extols_chaos]"	input_cell2="[neon_tubes]"
-		output_cell1="air"				output_cell2="[neon_tubes]"
-		blob_radius1="10" 		blob_restrict_to_input_material1="1"
+		input_cell1="[extols_chaos]" input_cell2="[EXTOL_ANTIMATTER]"
+		output_cell1="air" output_cell2="[EXTOL_ANTIMATTER]"
+		blob_radius1="10" blob_restrict_to_input_material1="1"
 		entity="mods/Forge_Perks/files/items/rng_potions/undone.xml"
 		>
 	</Reaction>
 	
 	<Reaction probability="100"
-		input_cell1="[extols_unknown]"	input_cell2="[neon_tubes]"
-		output_cell1="air"				output_cell2="[neon_tubes]"
-		blob_radius1="10" 		blob_restrict_to_input_material1="1"
+		input_cell1="[extols_unknown]" input_cell2="[EXTOL_ANTIMATTER]"
+		output_cell1="air" output_cell2="[EXTOL_ANTIMATTER]"
+		blob_radius1="10" blob_restrict_to_input_material1="1"
 		entity="mods/Forge_Perks/files/items/rng_potions/done.xml"
 		>
 	</Reaction>
 	
-	<Reaction probability="1"
-		input_cell1="[neon_tubes]"		input_cell2="air"
-		output_cell1="[neon_tubes]"		output_cell2="liquid_fire_weak"
+	<Reaction probability="4"
+		input_cell1="[EXTOL_ANTIMATTER]" input_cell2="air"
+		output_cell1="[EXTOL_ANTIMATTER]"	output_cell2="liquid_fire_weak"
 		>
 	</Reaction>
 	
 	<Reaction probability="100"
-		input_cell1="silver" 	input_cell2="steel_sand" 	input_cell3="magic_liquid_blood_magic"
-		output_cell1="sand_ground" 	output_cell2="sand_ground" 		output_cell3="air"
-		blob_radius1="10" 			blob_radius2="10"		blob_radius3="10"
-		blob_restrict_to_input_material1="1" blob_restrict_to_input_material2="1" blob_restrict_to_input_material3="1"
-		>
+		input_cell1="silver" input_cell2="steel_sand" input_cell3="magic_liquid_blood_magic"
+		output_cell1="ext_sand_ground" output_cell2="ext_sand_ground" output_cell3="fire"
+		blob_radius1="2" blob_radius2="2" blob_radius3="100"
+		blob_restrict_to_input_material1="1" blob_restrict_to_input_material2="1" blob_restrict_to_input_material3="1">
 	</Reaction>
 	
+	<Reaction probability="100"
+		input_cell1="ext_sand_ground" input_cell2="air"
+		output_cell1="ext_sand_ground" output_cell2="air">
+		<ExplosionConfig
+		damage="40"
+		cell_explosion_power="40"
+		cell_explosion_damage_required="500000"
+		cell_explosion_radius_min="10"
+		cell_explosion_radius_max="35"
+		cell_explosion_probability="1.1"
+		camera_shake="20"
+		ray_energy="10000000"
+		explosion_sprite="">
+		</ExplosionConfig>
+	</Reaction>
  </Materials>
