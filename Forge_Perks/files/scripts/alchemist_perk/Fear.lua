@@ -147,6 +147,26 @@ local mast_perk = GameHasFlagRun("Perk_Wand_Master")
 local mach_perk = GameHasFlagRun("Perk_Wand_Crafter")
 SetRandomSeed( GameGetFrameNum(), y - x )
 function interacting(entity_who_interacted, entity_interacted, interactable_name)
+	local near_items = EntityGetInRadiusWithTag( x, y, 60, "item" )
+	local near_cards = EntityGetInRadiusWithTag( x, y, 60, "card_action" )
+	if #near_items > 0 then
+		for i, item_ent in ipairs(near_items) do
+			local parent = EntityGetParent(item_ent)
+			if parent == nil or parent == 0 then
+				GamePrint("Too many nearby items")
+				return
+			end
+		end
+	end
+	if #near_cards > 0 then
+		for i, card_ent in ipairs(near_cards) do
+			local parent = EntityGetParent(card_ent)
+			if parent == nil or parent == 0 then
+				GamePrint("Too many nearby items")
+				return
+			end
+		end
+	end
 	local current_part = getCurrentlyEquippedPartId()
 	if current_part ~= nil then
 		EntityRemoveTag(current_part, "forge_wand_part")
@@ -194,7 +214,6 @@ function interacting(entity_who_interacted, entity_interacted, interactable_name
 		local best_mat = tonumber(ComponentGetValue2(vsc_id, "value_string"))
 		best_mat = best_mat or 0
 		ComponentObjectSetValue2(AC_id, "gunaction_config", "reload_time", recharge + (best_mat * 3))
-		GamePrint("?")
 		local manamax = ComponentGetValue2(AC_id, "mana_max")
 		ComponentSetValue2(AC_id, "mana_max", manamax + (best_mat * 15))
 		local charge_speed = ComponentGetValue2( AC_id, "mana_charge_speed" )
@@ -203,7 +222,6 @@ function interacting(entity_who_interacted, entity_interacted, interactable_name
 		unknown = unknown or 0
 		local power_trip = ComponentObjectGetValue2(AC_id, "gun_config", "shuffle_deck_when_empty")
 		local stored_power = ComponentObjectGetValue2(AC_id, "gunaction_config", "speed_multiplier")
-		GamePrint("?")
 		if power_trip == 1 then
 			ComponentObjectSetValue2(ability_component_id, "gun_config", "shuffle_deck_when_empty", 0)
 			unknown = unknown - 1
@@ -238,22 +256,26 @@ function interacting(entity_who_interacted, entity_interacted, interactable_name
 			ComponentSetValue2(vsc_id, "value_int", better_mat - i)
 		end
 		local best_mat = tonumber(ComponentGetValue2(vsc_id, "value_string"))
-		for i = 1, best_mat do
-			if i >=5 then
-				break
+		if best_mat > 0 then
+			for i = 1, best_mat do
+				if i >=5 then
+					break
+				end
+				local loaded_wand = EntityLoad("data/entities/items/wand_level_06_better.xml", Random(-10000,10000), Random(-10000, 10000))
+				EntityApplyTransform(loaded_wand, x - (i * 5), y - 9)
+				ComponentSetValue2(vsc_id, "value_int", best_mat - i)
 			end
-			local loaded_wand = EntityLoad("data/entities/items/wand_level_06_better.xml", Random(-10000,10000), Random(-10000, 10000))
-			EntityApplyTransform(loaded_wand, x - (i * 5), y - 9)
-			ComponentSetValue2(vsc_id, "value_int", best_mat - i)
 		end
 		local unknown = tonumber(ComponentGetValue2(vsc_id, "name"))
-		for i = 1, best_mat do
-			if i >=5 then
-				break
+		if unknown > 0 then
+			for i = 1, best_mat do
+				if i >=5 then
+					break
+				end
+				local loaded_wand = EntityLoad("data/entities/items/wand_level_10.xml", Random(-10000,10000), Random(-10000, 10000))
+				EntityApplyTransform(loaded_wand, x - (i * 5), y - 12)
+				ComponentSetValue2(vsc_id, "value_int", unknown - i)
 			end
-			local loaded_wand = EntityLoad("data/entities/items/wand_level_10.xml", Random(-10000,10000), Random(-10000, 10000))
-			EntityApplyTransform(loaded_wand, x - (i * 5), y - 12)
-			ComponentSetValue2(vsc_id, "value_int", unknown - i)
 		end
 	end
 end

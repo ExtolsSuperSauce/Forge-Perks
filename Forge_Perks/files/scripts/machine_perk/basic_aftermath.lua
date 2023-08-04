@@ -9,7 +9,7 @@ gold = gold or CellFactory_GetType("gold")
 copper = copper or CellFactory_GetType("copper")
 steel = steel or CellFactory_GetType("steel_sand")
 table_of_indexes = table_of_indexes or {}
-
+local table_of_chara = { "E", "R", "O", "0", "R" }
 local eid = GetUpdatedEntityID()
 local mic_id = EntityGetFirstComponentIncludingDisabled( eid, "MaterialInventoryComponent" )
 local mats_list = ComponentGetValue2(mic_id, "count_per_material_type")
@@ -24,11 +24,19 @@ old_ui = old_ui or "HELPMEDEARGODIMTRAPPEDINANANVIL" --for real I hope no one ha
 if check_bool then
 	for i, material_count in ipairs(mats_list) do
 		local index = i-1
-		if index == bird then 
+		if index == CellFactory_GetType("ext_sand_ground") and material_count > 0 then
+			local help_me = "ER"
+			help_me = help_me .. table_of_chara[Random(1, #table_of_chara)]
+			help_me = help_me .. table_of_chara[Random(1, #table_of_chara)]
+			help_me = help_me .. table_of_chara[Random(1, #table_of_chara)]
+			GamePrint(help_me)
+			return
+		elseif index == bird then
 			bird_count = bird_count + material_count
 		elseif index == magic or index == gold or index == diamond then
 			magic_count = magic_count + material_count
 		elseif index == machine or index == steel or index == silver then
+			--print(material_count)
 			machine_count = machine_count + material_count
 		elseif index == nature or index == copper or index == brass then
 			nature_count = nature_count + material_count
@@ -96,6 +104,12 @@ ComponentSetValue2( forge_storage, "value_string", tostring(magic_store - magic_
 ComponentSetValue2( forge_storage, "value_float", machine_store - machine_count)
 ComponentSetValue2( forge_storage, "value_int", nature_store - nature_count)
 AddMaterialInventoryMaterial( eid, "magic_liquid_blood_bird", 0 )
+AddMaterialInventoryMaterial( eid, "diamond", 0 )
+AddMaterialInventoryMaterial( eid, "silver", 0 )
+AddMaterialInventoryMaterial( eid, "copper", 0 )
+AddMaterialInventoryMaterial( eid, "steel", 0 )
+AddMaterialInventoryMaterial( eid, "brass", 0 )
+AddMaterialInventoryMaterial( eid, "gold", 0 )
 AddMaterialInventoryMaterial( eid, "magic_liquid_blood_machine", 0 )
 AddMaterialInventoryMaterial( eid, "magic_liquid_blood_magic", 0 )
 AddMaterialInventoryMaterial( eid, "magic_liquid_blood_nature", 0 )

@@ -1,6 +1,8 @@
 <Entity name="ExtolMatDump" >
 
-	<VariableStorageComponent>
+	<VariableStorageComponent
+		name="0"
+		value_srting="0">
 	</VariableStorageComponent>
 	
 	<ParticleEmitterComponent
